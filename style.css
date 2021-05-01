@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.content {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#textfield {
+  margin-top: 10%;
+  min-height: 30%;
+  border: 2px solid #0984e3;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1.2rem;
+  padding: 10px 2px;
+  box-shadow: 0 0 4pc 1px #b2bec3;
+}
+
+p {
+  color: #0984e3;
+  font-size: 1.2rem;
+}
+
+button {
+  padding: 10px 30px;
+  background-color: #74b9ff;
+  color: white;
+  border-radius: 10px;
+  border: 2px solid #0983e3;
+  font-size: 1.2rem;
+}
+
+.stopwatch {
+  font-size: 5em;
+  font-family: monospace;
+}
