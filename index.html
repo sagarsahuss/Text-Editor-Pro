@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Text Editor Pro</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+	<div class="content">
+		<textarea cols="50" id="textfield" oninput="start()"></textarea>
+		<br>
+		<p id="showchar"></p>
+		<p id="showword"></p>
+		<p id="stats"></p>
+		<p id="speed"></p>
+		<br>
+		<div class="stopwatch">00:00:00</div>
+	</div>
+	<div class="controls">
+		<!-- <button onclick="start()">Start</button> -->
+		<!-- <button onclick="pause()">Stop</button> -->
+		<!-- <button onclick="stop()">Stop</button> -->
+		<button onclick="lap()">Count Stats</button>
+	</div>
+
+
+	<script>
+
+		var ms = 0, s = 0, m = 0;
+		var timer;
+
+		var stopwatchEl = document.querySelector('.stopwatch');
+
+		function countwords(){
+			const char = document.getElementById('textfield').value.length;
+
+			document.getElementById('showchar').innerHTML = "Number of Characters = " + char;
+
+			var word = document.getElementById('textfield').value;
+			word = word.match( /\w+/g );
+			word = word.length;
+			
+			document.getElementById('showword').innerHTML = "Number of Words = " + word;
+		}
+
+		function start() {
+			if(!timer) {
+				timer = setInterval(run, 10);
+			}
+		}
+
+		function run() {
+			stopwatchEl.textContent = getTimer();
+			ms++;
+			if(ms == 100) {
+				ms = 0;
+				s++;
+			}
+			if(s == 60) {
+				s = 0;
+				m++;
+			}
+		}
+
+		function pause() {
+			document.getElementById("textfield").disabled = true;
+			stopTimer();
+		}
+
+		// function stop() {
+		// 	stopTimer();
+		// 	timer = false;
+		// 	ms = 0;
+		// 	s = 0;
+		// 	m = 0;
+		// 	stopwatchEl.textContent = getTimer();
+		// }
+
+		function stopTimer() {
+			clearInterval(timer);
+			// timer = false;
+		}
+
+		function getTimer() {
+
+			return (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + ":" + (ms < 10 ? "0" + ms : ms);
+			
+		}
+
+		function lap() {
+			if(timer) {
+				pause();
+				countwords();
+				getTimer();
+				var timing = (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + ":" + (ms < 10 ? "0" + ms : ms);
+				var li = document.getElementById('stats');
+				li.innerText = 'Your Total Time is: ' + timing;
+
+				var word = document.getElementById('textfield').value;
+				word = word.match( /\w+/g );
+				word = word.length;
+
+				var seconds = (m*60) + s ;
+				var result = word/seconds * 60;
+				var speed = document.getElementById('speed');
+				speed.innerHTML = "Your Speed is: "  + result + " words/min";
+								
+			}
+}
+
+	</script>
+</body>
+</html>
