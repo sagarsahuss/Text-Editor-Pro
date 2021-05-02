@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div class="content">
-		<textarea cols="50" id="textfield" oninput="start()"></textarea>
+		<textarea cols="50" id="textfield" oninput="start()" placeholder="Start Writing..."></textarea>
 		<br>
 		<p id="showchar"></p>
 		<p id="showword"></p>
@@ -102,7 +102,7 @@
 				word = word.length;
 
 				var seconds = (m*60) + s ;
-				var result = word/seconds * 60;
+				var result = Math.round(word/seconds * 60);
 				var speed = document.getElementById('speed');
 				speed.innerHTML = "Your Speed is: "  + result + " words/min";
 								
